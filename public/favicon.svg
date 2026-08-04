@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Hamza Qadeer favicon">
+  <rect width="64" height="64" rx="14" fill="#050505"/>
+  <rect x="12" y="12" width="40" height="40" rx="10" fill="none" stroke="#00FF41" stroke-width="3"/>
+  <rect x="22" y="22" width="20" height="20" rx="4" fill="none" stroke="#00FF41" stroke-width="3"/>
+  <path d="M32 12v-6M32 58v-6M12 32H6M58 32h-6M18 18l-4-4M46 46l4 4M46 18l4-4M18 46l-4 4" stroke="#00FF41" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="32" cy="32" r="4" fill="#00FF41"/>
+</svg>
