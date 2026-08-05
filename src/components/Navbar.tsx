@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, Terminal, FileText, Cpu, Linkedin, Github, Instagram, Mail, Phone } from 'lucide-react';
 import { SOCIAL_LINKS, CONTACT_DATA } from '../data/portfolioData';
@@ -22,6 +22,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenResume, onToggleTerminal }
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const pendingMobileSectionRef = useRef<string | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -43,23 +44,42 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenResume, onToggleTerminal }
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    e.preventDefault();
-    const targetId = href.substring(1);
+  useEffect(() => {
+    if (mobileMenuOpen || !pendingMobileSectionRef.current) return;
 
-    const runScroll = () => {
-      if (scrollToSection(targetId)) {
-        setActiveSection(targetId);
-      }
+    const targetId = pendingMobileSectionRef.current;
+    pendingMobileSectionRef.current = null;
+
+    let raf2 = 0;
+    const raf1 = window.requestAnimationFrame(() => {
+      raf2 = window.requestAnimationFrame(() => {
+        if (scrollToSection(targetId)) {
+          setActiveSection(targetId);
+        }
+      });
+    });
+
+    return () => {
+      window.cancelAnimationFrame(raf1);
+      window.cancelAnimationFrame(raf2);
     };
+  }, [mobileMenuOpen]);
 
-    if (mobileMenuOpen) {
+  const navigateToSection = (targetId: string, closeMobileMenu: boolean) => {
+    setActiveSection(targetId);
+
+    if (closeMobileMenu) {
+      pendingMobileSectionRef.current = targetId;
       setMobileMenuOpen(false);
-      window.setTimeout(runScroll, 250);
       return;
     }
 
-    runScroll();
+    scrollToSection(targetId);
+  };
+
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    navigateToSection(href.substring(1), mobileMenuOpen);
   };
 
   const renderSocialIcon = (key: string) => {
@@ -240,10 +260,10 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenResume, onToggleTerminal }
               {NAV_LINKS.map(link => {
                 const isActive = activeSection === link.href.substring(1);
                 return (
-                  <a
+                  <button
                     key={link.name}
-                    href={link.href}
-                    onClick={e => handleNavClick(e, link.href)}
+                    type="button"
+                    onClick={() => navigateToSection(link.href.substring(1), true)}
                     className={`px-4 py-2.5 rounded-lg font-mono text-sm uppercase tracking-wider flex items-center justify-between transition-colors ${
                       isActive
                         ? 'bg-[#00FF41]/10 text-[#00FF41] border border-[#00FF41]/30 font-bold'
@@ -252,7 +272,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenResume, onToggleTerminal }
                   >
                     <span>{link.name}</span>
                     <span className="text-xs opacity-50">&gt;</span>
-                  </a>
+                  </button>
                 );
               })}
 
