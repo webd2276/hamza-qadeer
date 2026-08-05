@@ -58,7 +58,7 @@ export const AutomationSection: React.FC = () => {
   };
 
   return (
-    <section id="automation" className="py-24 relative bg-[#050505] border-t border-white/10 overflow-hidden">
+    <section id="automation" className="py-24 relative bg-[#050505] border-t border-white/10 overflow-hidden scroll-mt-36 sm:scroll-mt-40 lg:scroll-mt-44">
       {/* Background Subtle Gradient Glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#00FF41]/5 rounded-full blur-[140px] pointer-events-none" />
 

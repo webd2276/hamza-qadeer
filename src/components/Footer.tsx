@@ -1,10 +1,10 @@
 import React from 'react';
 import { Cpu, Terminal, ShieldCheck, Heart } from 'lucide-react';
+import { scrollToSection } from '../utils/scrollToSection';
 
 export const Footer: React.FC = () => {
   const scrollTo = (id: string) => {
-    const el = document.getElementById(id);
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
+    scrollToSection(id);
   };
 
   return (

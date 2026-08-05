@@ -12,7 +12,7 @@ const ICON_MAP: Record<string, React.ReactNode> = {
 
 export const About: React.FC = () => {
   return (
-    <section id="about" className="py-24 relative bg-[#050505] border-t border-white/10 overflow-hidden">
+    <section id="about" className="py-24 relative bg-[#050505] border-t border-white/10 overflow-hidden scroll-mt-36 sm:scroll-mt-40 lg:scroll-mt-44">
       {/* Background Accent Lines */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-[#00FF41]/5 rounded-full blur-3xl pointer-events-none" />
 

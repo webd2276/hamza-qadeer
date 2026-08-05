@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, Terminal, FileText, Cpu, Linkedin, Github, Instagram, Mail, Phone } from 'lucide-react';
 import { SOCIAL_LINKS, CONTACT_DATA } from '../data/portfolioData';
+import { scrollToSection } from '../utils/scrollToSection';
 
 interface NavbarProps {
   onOpenResume?: () => void;
@@ -44,13 +45,21 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenResume, onToggleTerminal }
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
-    setMobileMenuOpen(false);
     const targetId = href.substring(1);
-    const element = document.getElementById(targetId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-      setActiveSection(targetId);
+
+    const runScroll = () => {
+      if (scrollToSection(targetId)) {
+        setActiveSection(targetId);
+      }
+    };
+
+    if (mobileMenuOpen) {
+      setMobileMenuOpen(false);
+      window.setTimeout(runScroll, 250);
+      return;
     }
+
+    runScroll();
   };
 
   const renderSocialIcon = (key: string) => {

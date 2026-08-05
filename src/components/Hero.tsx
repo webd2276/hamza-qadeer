@@ -4,6 +4,7 @@ import { HERO_DATA } from '../data/portfolioData';
 import { Hero3DScene } from './Hero3DScene';
 import { ArrowDownRight, Terminal, Sparkles, CheckCircle2, ShieldCheck, Code, Globe, Cpu } from 'lucide-react';
 import hamzaPortrait from '../../assets/hamza.png';
+import { scrollToSection } from '../utils/scrollToSection';
 
 interface HeroProps {
   onOpenResume?: () => void;
@@ -13,14 +14,11 @@ interface HeroProps {
 export const Hero: React.FC<HeroProps> = ({ onOpenResume, onToggleTerminal }) => {
   const scrollToProjects = (e: React.MouseEvent) => {
     e.preventDefault();
-    const element = document.getElementById('projects');
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
+    scrollToSection('projects');
   };
 
   return (
-    <section id="home" className="relative min-h-screen pt-36 sm:pt-40 pb-16 flex items-center justify-center overflow-hidden">
+    <section id="home" className="relative min-h-screen pt-36 sm:pt-40 pb-16 flex items-center justify-center overflow-hidden scroll-mt-36 sm:scroll-mt-40 lg:scroll-mt-44">
       {/* Background Matrix Grid Subtle Pattern */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,255,65,0.05)_0,transparent_70%)] pointer-events-none" />
       <div className="absolute inset-0 matrix-scanline opacity-20 pointer-events-none" />
