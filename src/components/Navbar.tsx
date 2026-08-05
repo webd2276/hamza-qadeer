@@ -18,6 +18,43 @@ const NAV_LINKS = [
   { name: 'Contact', href: '#contact' },
 ];
 
+const SOCIAL_BRAND_STYLES: Record<
+  string,
+  { hoverText: string; hoverBorder: string; hoverBg: string; badgeBg?: string; badgeText?: string; badgeBorder?: string }
+> = {
+  linkedin: {
+    hoverText: 'hover:text-[#0A66C2]',
+    hoverBorder: 'hover:border-[#0A66C2]/50',
+    hoverBg: 'hover:bg-[#0A66C2]/10',
+  },
+  github: {
+    hoverText: 'hover:text-[#181717]',
+    hoverBorder: 'hover:border-white',
+    hoverBg: 'hover:bg-white',
+  },
+  instagram: {
+    hoverText: 'hover:text-[#E4405F]',
+    hoverBorder: 'hover:border-[#E4405F]/50',
+    hoverBg: 'hover:bg-[#E4405F]/10',
+  },
+  fiverr: {
+    hoverText: 'hover:text-[#1DBF73]',
+    hoverBorder: 'hover:border-[#1DBF73]/50',
+    hoverBg: 'hover:bg-[#1DBF73]/10',
+    badgeBg: 'bg-[#1DBF73]/20',
+    badgeText: 'text-[#1DBF73]',
+    badgeBorder: 'border-[#1DBF73]/30',
+  },
+  upwork: {
+    hoverText: 'hover:text-[#14A800]',
+    hoverBorder: 'hover:border-[#14A800]/50',
+    hoverBg: 'hover:bg-[#14A800]/10',
+    badgeBg: 'bg-[#14A800]/20',
+    badgeText: 'text-[#14A800]',
+    badgeBorder: 'border-[#14A800]/30',
+  },
+};
+
 export const Navbar: React.FC<NavbarProps> = ({ onOpenResume, onToggleTerminal }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
@@ -102,6 +139,8 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenResume, onToggleTerminal }
   };
 
   const renderSocialIcon = (key: string) => {
+    const styles = SOCIAL_BRAND_STYLES[key] ?? SOCIAL_BRAND_STYLES.github;
+
     switch (key) {
       case 'linkedin':
         return <Linkedin className="w-3.5 h-3.5" />;
@@ -111,13 +150,17 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenResume, onToggleTerminal }
         return <Instagram className="w-3.5 h-3.5" />;
       case 'fiverr':
         return (
-          <span className="font-mono text-[10px] font-bold tracking-tighter bg-emerald-500/20 text-emerald-400 px-1 py-0.5 rounded border border-emerald-500/30">
+          <span
+            className={`font-mono text-[10px] font-bold tracking-tighter px-1 py-0.5 rounded border ${styles.badgeBg ?? ''} ${styles.badgeText ?? ''} ${styles.badgeBorder ?? ''}`}
+          >
             Fi
           </span>
         );
       case 'upwork':
         return (
-          <span className="font-mono text-[10px] font-bold tracking-tighter bg-green-500/20 text-[#00FF41] px-1 py-0.5 rounded border border-[#00FF41]/30">
+          <span
+            className={`font-mono text-[10px] font-bold tracking-tighter px-1 py-0.5 rounded border ${styles.badgeBg ?? ''} ${styles.badgeText ?? ''} ${styles.badgeBorder ?? ''}`}
+          >
             Up
           </span>
         );
@@ -161,7 +204,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenResume, onToggleTerminal }
                   target="_blank"
                   rel="noopener noreferrer"
                   title={social.name}
-                  className="flex items-center gap-1 px-2 py-1 rounded bg-[#0A0A0A] border border-white/10 text-white/70 hover:text-[#00FF41] hover:border-[#00FF41]/50 hover:shadow-[0_0_8px_rgba(0,255,65,0.3)] transition-all"
+                  className={`flex items-center gap-1 px-2 py-1 rounded bg-[#0A0A0A] border border-white/10 text-white/70 transition-all ${SOCIAL_BRAND_STYLES[social.iconKey]?.hoverText ?? 'hover:text-white'} ${SOCIAL_BRAND_STYLES[social.iconKey]?.hoverBorder ?? 'hover:border-white/30'} ${SOCIAL_BRAND_STYLES[social.iconKey]?.hoverBg ?? 'hover:bg-white/5'} hover:shadow-[0_0_8px_rgba(255,255,255,0.12)]`}
                 >
                   {renderSocialIcon(social.iconKey)}
                   <span className="text-[11px] font-mono hidden lg:inline">{social.name}</span>
@@ -305,7 +348,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenResume, onToggleTerminal }
                       target="_blank"
                       rel="noopener noreferrer"
                       title={social.name}
-                      className="p-2 text-white/80 hover:text-[#00FF41]"
+                      className={`p-2 text-white/80 transition-colors ${SOCIAL_BRAND_STYLES[social.iconKey]?.hoverText ?? 'hover:text-white'}`}
                     >
                       {renderSocialIcon(social.iconKey)}
                     </a>
