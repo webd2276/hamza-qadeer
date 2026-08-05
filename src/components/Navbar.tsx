@@ -30,11 +30,16 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenResume, onToggleTerminal }
       setIsScrolled(window.scrollY > 20);
 
       const sections = NAV_LINKS.map(link => link.href.substring(1));
-      const scrollPosition = window.scrollY + 100;
+      const scrollPosition = window.scrollY;
 
       for (let i = sections.length - 1; i >= 0; i--) {
         const section = document.getElementById(sections[i]);
-        if (section && section.offsetTop <= scrollPosition) {
+        if (!section) continue;
+
+        const scrollMarginTop = window.getComputedStyle(section).scrollMarginTop;
+        const activationOffset = Number.parseFloat(scrollMarginTop) || 0;
+
+        if (section.offsetTop - activationOffset <= scrollPosition) {
           setActiveSection(sections[i]);
           break;
         }
@@ -42,6 +47,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenResume, onToggleTerminal }
     };
 
     window.addEventListener('scroll', handleScroll);
+    handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
