@@ -23,6 +23,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenResume, onToggleTerminal }
   const [activeSection, setActiveSection] = useState('home');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const pendingMobileSectionRef = useRef<string | null>(null);
+  const mobileScrollTimeoutRef = useRef<number | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -50,18 +51,18 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenResume, onToggleTerminal }
     const targetId = pendingMobileSectionRef.current;
     pendingMobileSectionRef.current = null;
 
-    let raf2 = 0;
-    const raf1 = window.requestAnimationFrame(() => {
-      raf2 = window.requestAnimationFrame(() => {
-        if (scrollToSection(targetId)) {
-          setActiveSection(targetId);
-        }
-      });
-    });
+    mobileScrollTimeoutRef.current = window.setTimeout(() => {
+      if (scrollToSection(targetId)) {
+        setActiveSection(targetId);
+      }
+      mobileScrollTimeoutRef.current = null;
+    }, 350);
 
     return () => {
-      window.cancelAnimationFrame(raf1);
-      window.cancelAnimationFrame(raf2);
+      if (mobileScrollTimeoutRef.current !== null) {
+        window.clearTimeout(mobileScrollTimeoutRef.current);
+        mobileScrollTimeoutRef.current = null;
+      }
     };
   }, [mobileMenuOpen]);
 
@@ -250,12 +251,13 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenResume, onToggleTerminal }
       {/* Mobile Menu Drawer */}
       <AnimatePresence>
         {mobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-[#0A0A0A] border-b border-white/10 overflow-hidden"
-          >
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.35, ease: 'easeInOut' }}
+              className="md:hidden bg-[#0A0A0A] border-b border-white/10 overflow-hidden"
+            >
             <div className="px-4 pt-3 pb-6 flex flex-col gap-2">
               {NAV_LINKS.map(link => {
                 const isActive = activeSection === link.href.substring(1);
