@@ -66,15 +66,15 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenResume, onToggleTerminal }
   }, [mobileMenuOpen]);
 
   const navigateToSection = (targetId: string, closeMobileMenu: boolean) => {
-    setActiveSection(targetId);
-
     if (closeMobileMenu) {
       pendingMobileSectionRef.current = targetId;
       setMobileMenuOpen(false);
       return;
     }
 
-    scrollToSection(targetId);
+    if (scrollToSection(targetId)) {
+      setActiveSection(targetId);
+    }
   };
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
