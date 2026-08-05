@@ -30,19 +30,31 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenResume, onToggleTerminal }
       setIsScrolled(window.scrollY > 20);
 
       const sections = NAV_LINKS.map(link => link.href.substring(1));
-      const scrollPosition = window.scrollY;
+      const focusPoint = window.scrollY + window.innerHeight * 0.35;
+      let nextActiveSection = null as string | null;
 
       for (let i = sections.length - 1; i >= 0; i--) {
         const section = document.getElementById(sections[i]);
-        if (!section) continue;
+        if (!section) {
+          continue;
+        }
 
-        const scrollMarginTop = window.getComputedStyle(section).scrollMarginTop;
-        const activationOffset = Number.parseFloat(scrollMarginTop) || 0;
+        const sectionTop = section.offsetTop;
+        const sectionBottom = sectionTop + section.offsetHeight;
 
-        if (section.offsetTop - activationOffset <= scrollPosition) {
-          setActiveSection(sections[i]);
+        if (sectionTop <= focusPoint && sectionBottom > focusPoint) {
+          nextActiveSection = sections[i];
           break;
         }
+
+        if (sectionTop <= focusPoint) {
+          nextActiveSection = sections[i];
+          break;
+        }
+      }
+
+      if (nextActiveSection) {
+        setActiveSection(prev => (prev === nextActiveSection ? prev : nextActiveSection));
       }
     };
 
