@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { HERO_DATA } from '../data/portfolioData';
 import { Hero3DScene } from './Hero3DScene';
 import { ArrowDownRight, Terminal, Sparkles, CheckCircle2, ShieldCheck, Code, Globe, Cpu } from 'lucide-react';
-import hamzaPortrait from '../../assets/hamza.png';
+import hamzaPortrait from '../assets/images/hamza_qadeer_transparent_1785873172817.jpg';
 import { scrollToSection } from '../utils/scrollToSection';
 
 interface HeroProps {
