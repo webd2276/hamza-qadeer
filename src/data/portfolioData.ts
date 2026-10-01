@@ -6,8 +6,8 @@ export const HERO_DATA = {
   person: "Hamza Qadeer — Full Stack & WordPress Developer",
   name: "Hamza Qadeer",
   headlinePrefix: "Hi, I'm ",
-  subtext: "I build fast, secure, and conversion-focused websites with a premium visual layer, from custom WordPress systems to motion-led interfaces and interactive 3D storytelling.",
-  badge: "Full Stack, WordPress & 3D Experiences",
+  subtext: "I build fast, secure and conversion-focused websites, custom Next.js web apps, and intelligent AI systems like agents, RAG chatbots and automation workflows that help businesses work smarter.",
+  badge: "Full-Stack, AI & WordPress Development",
   stats: [
     { value: "50+", label: "Projects Completed", tag: "[PRJ-50]" },
     { value: "3+", label: "Years Experience", tag: "[EXP-03]" },
@@ -18,11 +18,13 @@ export const HERO_DATA = {
 export const ABOUT_DATA = {
   sectionTitle: "About Me",
   tag: "[ SYSTEM_PROFILE ]",
-  bio: "I am a dedicated Full Stack & WordPress Developer with hands-on experience in building custom websites from scratch using HTML, CSS, JavaScript, PHP, and MySQL. I focus on performance, security, clean code, and scalable architecture to help businesses grow online.",
+  bio: "I am a Full-Stack and AI Developer with hands-on experience in WordPress, Next.js, React, Python, AI agents, RAG systems, custom chatbots and n8n automation.",
   coreSkillBars: [
     { name: "WordPress Development", percentage: 85 },
-    { name: "JavaScript", percentage: 90 },
-    { name: "PHP & MySQL", percentage: 95 }
+    { name: "JavaScript, Next.js & React", percentage: 90 },
+    { name: "Python & AI Development", percentage: 86 },
+    { name: "AI Agents & RAG Systems", percentage: 84 },
+    { name: "n8n Automation", percentage: 82 }
   ] as CoreSkillBar[],
   features: [
     {
@@ -61,12 +63,12 @@ export const SKILLS_CATEGORIES: SkillCategory[] = [
   {
     title: "Frontend Development",
     iconName: "Code2",
-    items: ["HTML5", "CSS3", "JavaScript", "Responsive Design"]
+    items: ["HTML5", "CSS3", "JavaScript", "Responsive Design", "Next.js", "React", "TypeScript", "Tailwind CSS"]
   },
   {
     title: "Backend Development",
     iconName: "Database",
-    items: ["PHP", "MySQL", "Custom Admin Panels"]
+    items: ["PHP", "MySQL", "Custom Admin Panels", "Python", "FastAPI", "Node.js", "Express"]
   },
   {
     title: "APIs & Authentication",
@@ -76,7 +78,7 @@ export const SKILLS_CATEGORIES: SkillCategory[] = [
   {
     title: "Deployment & Tools",
     iconName: "Server",
-    items: ["GitHub", "cPanel", "VPS", "XAMPP"]
+    items: ["GitHub", "cPanel", "VPS", "XAMPP", "Vercel", "Netlify", "Docker"]
   },
   {
     title: "System Basics",
@@ -86,12 +88,28 @@ export const SKILLS_CATEGORIES: SkillCategory[] = [
   {
     title: "Automation & N8n",
     iconName: "Workflow",
-    items: ["N8n Workflows", "Webhook Triggers", "API Automation", "WhatsApp Bot", "Google Sheets", "Zapier Alternative"]
+    items: ["N8n Workflows", "Webhook Triggers", "API Automation", "WhatsApp Bot", "Google Sheets", "Zapier Alternative", "AI Agents", "Make.com", "Voice Automation (Vapi)"]
+  },
+  {
+    title: "Next.js Web Apps",
+    iconName: "Code2",
+    items: ["Custom Web Apps", "Dashboards & Admin Panels", "AI-Powered UIs", "API Routes"]
+  },
+  {
+    title: "AI Agents & Chatbots",
+    iconName: "Workflow",
+    items: ["AI Agents", "Custom Chatbots", "Tool Calling", "WhatsApp & Website Bots", "Voice AI"]
+  },
+  {
+    title: "RAG & LLM Systems",
+    iconName: "Database",
+    items: ["RAG Pipelines", "Embeddings", "Vector Search (ChromaDB / FAISS / Pinecone)", "LangChain", "OpenAI / Gemini / Claude APIs", "Prompt Engineering"]
   }
 ];
 
 export const TECH_PILLS = [
-  "HTML", "CSS", "JavaScript", "PHP", "MySQL", "WordPress", "WooCommerce", "Git", "REST API", "Docker", "N8n", "Automation"
+  "HTML", "CSS", "JavaScript", "PHP", "MySQL", "WordPress", "WooCommerce", "Git", "REST API", "Docker", "N8n", "Automation",
+  "Next.js", "React", "TypeScript", "Tailwind CSS", "Node.js", "Python", "FastAPI", "LangChain", "OpenAI", "RAG", "Vector DB"
 ];
 
 export const PROJECTS_DATA: Project[] = [
@@ -213,7 +231,7 @@ export const AUTOMATION_DATA = {
       description: "Leverage LLMs for auto-summarizing incoming support tickets, sentiment tagging, and post generation.",
       badge: { name: "AI Agent", variant: "planning" },
       iconName: "Sparkles",
-      integrations: ["Gemini / OpenAI", "LinkedIn", "N8n"]
+      integrations: ["Gemini / OpenAI", "LinkedIn", "N8n", "Python", "RAG"]
     }
   ] as WorkflowCard[],
   stats: [

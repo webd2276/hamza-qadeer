@@ -49,6 +49,12 @@ export const Footer: React.FC = () => {
               <li className="hover:text-[#00FF41] transition-colors cursor-pointer">
                 Website Optimization &amp; N8n
               </li>
+              <li className="hover:text-[#00FF41] transition-colors cursor-pointer">
+                Next.js Web Applications
+              </li>
+              <li className="hover:text-[#00FF41] transition-colors cursor-pointer">
+                AI Agents &amp; RAG Chatbots
+              </li>
             </ul>
           </div>
 
@@ -97,7 +103,7 @@ export const Footer: React.FC = () => {
               [ ARCHITECTURE ]
             </h4>
             <div className="text-xs text-white/60 space-y-1 font-sans">
-              <p>Built with React, Three.js, GSAP &amp; Framer Motion</p>
+              <p>Built with React, Next.js, Python, Three.js, GSAP &amp; Framer Motion</p>
               <p className="text-[11px] text-white/40">Dark Matrix Theme Design System</p>
             </div>
             <div className="pt-2 flex items-center gap-2">
